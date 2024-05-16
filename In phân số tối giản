@@ -1,0 +1,44 @@
+https://ibb.co/P6RBKpG
+
+#include <iostream>
+#include <cmath> 
+using namespace std;
+
+
+int gcd(int a, int b)
+{
+    if (b == 0)
+        return a;
+    return gcd(b, a % b); 
+}
+
+int main() {
+    int numerator, denominator;
+    cin >> numerator >> denominator;
+
+    // Kiểm tra mẫu số không được là 0
+    if (denominator == 0) {
+        cout << "Invalid denominator!";
+        return 1; // Thoát chương trình với mã lỗi
+    }
+
+    int sign = (numerator < 0) ^ (denominator < 0) ? -1 : 1;  // Kiểm tra dấu của phân số
+    numerator = abs(numerator);
+    denominator = abs(denominator);  // Chuẩn hóa thành dương trước khi tìm gcd
+
+    int greatest_common_divisor = gcd(numerator, denominator);
+
+    // Tối giản phân số
+    numerator /= greatest_common_divisor;
+    denominator /= greatest_common_divisor;
+
+    if (numerator != 0) {
+        if (sign == -1)
+            cout << "-";
+        cout << numerator;
+        if (denominator != 1)
+            cout << "/" << denominator;
+    }
+
+    return 0;
+}
