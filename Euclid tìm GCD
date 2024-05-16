@@ -1,0 +1,11 @@
+https://ibb.co/M1ssfvB
+
+int UCLN(int a, int b)
+{
+    // Your code here
+    if (b == 0) {
+        return a;
+    }
+    
+    return UCLN(b, a % b); 
+}
