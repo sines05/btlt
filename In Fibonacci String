@@ -1,0 +1,24 @@
+https://ibb.co/mbgKdWq
+
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+vector<string> fibonacci_words(string f0, string f1, int n) {
+    vector<string> str = {f0, f1};
+    for (int i = 2; i <= n; ++i) {
+        string result = str[i - 1] + str[i - 2];
+        str.push_back(result);
+    }
+    return str;
+}
+
+int main() {
+    string f0, f1;
+    cin >> f0 >> f1;
+    vector<string> res = fibonacci_words(f0, f1, 10);
+    for (size_t i = 0; i < res.size(); ++i) {
+        cout << res[i] << endl;
+    }
+}
