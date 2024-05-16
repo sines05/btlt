@@ -1,0 +1,29 @@
+https://ibb.co/tsSkp4D
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> num(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> num[i];
+    }
+    
+    vector<int> freq(10, 0);
+    for (int i = 0; i < n; ++i) {
+        freq[num[i]]++;
+    }
+    int max = 0, ans = -1;
+    for (int i = 9; i >= 0; --i) {
+        if (freq[i] >= max) {
+            max = freq[i];
+            ans = i;
+        }
+    }
+    cout << ans;
+    
+}
