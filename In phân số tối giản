@@ -4,9 +4,8 @@ https://ibb.co/P6RBKpG
 #include <cmath> 
 using namespace std;
 
-
-int gcd(int a, int b)
-{
+// Hàm tính ước số chung lớn nhất (gcd) bằng phương pháp Euclid
+int gcd(int a, int b) {
     if (b == 0)
         return a;
     return gcd(b, a % b); 
@@ -22,20 +21,33 @@ int main() {
         return 1; // Thoát chương trình với mã lỗi
     }
 
-    int sign = (numerator < 0) ^ (denominator < 0) ? -1 : 1;  // Kiểm tra dấu của phân số
+    // Xác định dấu của phân số
+    int sign = (numerator < 0) ^ (denominator < 0) ? -1 : 1;
+    
+    // Chuyển tử số và mẫu số về giá trị tuyệt đối để rút gọn
     numerator = abs(numerator);
-    denominator = abs(denominator);  // Chuẩn hóa thành dương trước khi tìm gcd
+    denominator = abs(denominator);
 
+    // Tính ước số chung lớn nhất
     int greatest_common_divisor = gcd(numerator, denominator);
 
-    // Tối giản phân số
+    // Rút gọn phân số
     numerator /= greatest_common_divisor;
     denominator /= greatest_common_divisor;
 
-    if (numerator != 0) {
+    // Xuất kết quả
+    if (numerator == 0) {
+        // Nếu tử số là 0, phân số là 0
+        cout << "0";
+    } else {
+        // Nếu phân số âm, in dấu trừ
         if (sign == -1)
             cout << "-";
+        
+        // In tử số
         cout << numerator;
+        
+        // In mẫu số nếu khác 1
         if (denominator != 1)
             cout << "/" << denominator;
     }
