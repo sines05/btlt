@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cmath>
+
+void generateBinaryStrings(int n) {
+    int total = 1 << n;  // 2^n
+    for (int i = 0; i < total; ++i) {
+        std::string binaryString;
+        for (int j = n - 1; j >= 0; --j) {
+            if ((i & (1 << j)) != 0) {
+                binaryString += "1";
+            } else {
+                binaryString += "0";
+            }
+        }
+        std::cout << binaryString << std::endl;
+    }
+}
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    if (n > 0 && n <= 10) {
+        generateBinaryStrings(n);
+    } 
+
+    return 0;
+}
