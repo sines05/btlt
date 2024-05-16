@@ -1,0 +1,20 @@
+https://ibb.co/C8fRY2W
+
+string decimal_to_binary(int number)
+{
+    // Your code here
+    vector<int> num;
+    
+    while (number > 0) {
+        int sub = number;
+        sub = sub % 2;
+        num.push_back(sub);
+        number = number / 2;
+    }
+    reverse(num.begin(), num.end());
+    string str;
+    for (size_t i = 0; i < num.size(); ++i) {
+        str += to_string(num[i]);
+    }
+    return str;
+}
