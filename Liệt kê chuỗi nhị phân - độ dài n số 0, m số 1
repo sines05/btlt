@@ -1,0 +1,37 @@
+https://ibb.co/R623DjH
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+void generateBinaryStrings(int n, int m, std::string current, std::vector<std::string> &result) {
+    if (n == 0 && m == 0) {
+        result.push_back(current);
+        return;
+    }
+
+    if (n > 0) {
+        generateBinaryStrings(n - 1, m, current + "0", result);
+    }
+
+    if (m > 0) {
+        generateBinaryStrings(n, m - 1, current + "1", result);
+    }
+}
+
+int main() {
+    int n, m;
+    std::cin >> n >> m;
+
+    std::vector<std::string> result;
+
+    generateBinaryStrings(n, m, "", result);
+
+    std::sort(result.begin(), result.end());
+
+    for (const std::string &str : result) {
+        std::cout << str << std::endl;
+    }
+
+    return 0;
+}
