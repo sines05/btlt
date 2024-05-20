@@ -1,0 +1,18 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+int main() {
+   string language_X;
+   cin >> language_X;
+   int n = language_X.size();
+   for(int i = 0; i < n; i++) {
+       for(int j = 0; j < n; j++) {
+           cout << language_X[i] << language_X[j] << ' ';
+           for(int k = 0; k < n; k++) {
+               cout << language_X[i] << language_X[j] << language_X[k] << ' ';
+           }
+       }
+   }
+   return 0;
+}
