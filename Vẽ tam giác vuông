@@ -1,0 +1,36 @@
+Viết chương trình nhập một số nguyên dương N và in ra một tam giác vuông kích thước N bằng các dấu sao (xem ví dụ).
+
+Đầu vào
+Một dòng gồm duy nhất một số nguyên N
+Đầu ra: N dòng biểu diễn một tam giác vuông bằng các dấu sao (xem ví dụ).
+For example:
+
+Input	Result
+5
+*****
+ ****
+  ***
+   **
+    *
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+    cin >> N;
+
+    for (int i = 0; i < N; ++i) {
+        // In ra các dấu cách
+        for (int j = 0; j < i; ++j) {
+            cout << " ";
+        }
+        // In ra các dấu sao
+        for (int j = i; j < N; ++j) {
+            cout << "*";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
