@@ -1,4 +1,9 @@
-https://ibb.co/yfbrsGC
+Xâu palindrome là xâu đọc xuôi hay đọc ngược vẫn ra cùng một xâu. Từ một xâu bất kì ta có thể tạo ra xâu palindrome bằng cách nối vào cuối xâu đã cho xâu đảo ngược của xâu đó. Viết chương trình sinh xâu palindrome từ 1 xâu đầu vào
+
+Đầu vào: Một xâu s bất kì.
+
+Đầu ra: Xâu palindrome sinh ra từ xâu s theo cách mô tả ở trên.
+
 
 #include <iostream>
 #include <string>
@@ -6,17 +11,18 @@ https://ibb.co/yfbrsGC
 
 using namespace std;
 
+string createPalindrome(const string& s) {
+    string reversed_s = s;
+    reverse(reversed_s.begin(), reversed_s.end());
+    return s + reversed_s;
+}
+
 int main() {
-    string str;
-    getline(cin, str);
-    
-    string rev = str;
-    
-    for (int i = 0; i < rev.length() / 2; ++i) {
-        swap(rev[i], rev[rev.length() - i - 1]);
-    }
-    string res = str + rev;
-    
-    cout << res;
-    
+    string s;
+    getline(cin, s); // Đọc vào cả dòng, bao gồm cả khoảng trắng nếu có
+
+    string palindrome = createPalindrome(s);
+    cout << palindrome << endl;
+
+    return 0;
 }
