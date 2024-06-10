@@ -1,0 +1,39 @@
+Viết hàm void printRow(int m, int n) in ra 1 dòng có m dấu cách (" ") sau đấy đến n dấu * ("*").
+Sử dụng hàm vừa định để in ra tam giác hoa thị với số dòng cần in được nhập từ bàn phím.
+For example:
+
+Input	Result
+5
+    *    
+   ***   
+  *****  
+ ******* 
+*********
+
+
+
+#include <iostream>
+
+// Hàm printRow in ra m dấu cách sau đó là n dấu *
+void printRow(int m, int n) {
+    for (int i = 0; i < m; ++i) {
+        std::cout << " ";
+    }
+    for (int j = 0; j < n; ++j) {
+        std::cout << "*";
+    }
+    std::cout << std::endl;
+}
+
+// Hàm main để nhập số dòng và in ra tam giác hoa thị
+int main() {
+    int rows;
+    std::cin >> rows;
+
+    for (int i = 0; i < rows; ++i) {
+        // in ra số dấu cách
+        printRow(rows - i - 1, 2 * i + 1);
+    }
+
+    return 0;
+}
