@@ -1,0 +1,42 @@
+Cho mảng A gồm n số nguyên 0<a_i<100.  Một tập con X gồm các số được chọn từ A sao cho trị tuyệt đối của hiệu hai số bất kỳ trong X luôn nhỏ hơn hoặc bằng 1
+Viết chương trình tìm và in ra số lượng phần tử lớn nhất có thể có của tập X
+
+Đầu vào
+Đầu vào từ bàn phím gồm hai dòng:
+
+Dòng đầu tiên chứa số nguyên n là kích thước mảng (2≤n≤100)
+Dòng thứ hai bao gồm n số nguyên là các phần tử của mảng được phân tách nhau bởi một dấu cách.
+Đầu ra
+In ra màn hình số lượng số nguyên lớn nhất có thể chọn từ mảng thỏa mãn điều kiện của đề bài.
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> A(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> A[i];
+    }
+
+    // Mảng đếm số lượng phần tử
+    vector<int> count(101, 0);
+    for (int i = 0; i < n; ++i) {
+        count[A[i]]++;
+    }
+
+    // Tìm số lượng phần tử lớn nhất có thể chọn
+    int maxCount = 0;
+    for (int i = 1; i < 100; ++i) {
+        maxCount = max(maxCount, count[i] + count[i + 1]);
+    }
+
+    cout << maxCount << endl;
+
+    return 0;
+}
