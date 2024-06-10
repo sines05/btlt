@@ -1,0 +1,30 @@
+Viết chương trình nhập một chữ số từ màn hình, in ra thông báo chữ số đó dưới dạng chữ (tiếng Việt không dấu). Trường hợp không phải là một chữ số, không làm gì cả.
+
+Đầu vào
+
+Một dòng chứa duy nhất một chữ số.
+
+Đầu ra
+
+Một dòng ghi chữ số đó dưới dạng chữ nếu đầu vào chỉ có một chữ số từ 0 đến 9. Ngược lại không ghi gì ra luồng xuất chuẩn.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    // Mảng chứa các chuỗi biểu diễn các chữ số dưới dạng chữ
+    string digit_to_word[] = {"khong", "mot", "hai", "ba", "bon", "nam", "sau", "bay", "tam", "chin"};
+    
+    string input;
+
+    cin >> input;
+
+    // Kiểm tra xem đầu vào có phải là một chữ số từ 0 đến 9 hay không
+    if (input.length() == 1 && isdigit(input[0])) {
+        int digit = input[0] - '0'; // Chuyển đổi kí tự số thành giá trị số nguyên
+        cout << digit_to_word[digit] << endl;
+    }
+
+    return 0;
+}
