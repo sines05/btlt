@@ -1,0 +1,42 @@
+Bội chung nhỏ nhất của hai số nguyên a và b là số nguyên dương nhỏ nhất chia hết cho cả a và b . Nếu a hoặc b bằng 0, không tồn tại số nguyên dương chia hết cho a và b,  khi đó quy ước bội chung nhỏ nhất của a và b là 0
+
+Hãy viết chương trình tính bội chung nhỏ nhất của hai số a và b
+
+Đầu vào
+Đầu vào từ bàn phím gồm một dòng duy nhất chứa 2 số nguyên a và b
+
+Đầu ra
+In ra màn hình bội số chung nhỏ nhất của a và b
+
+#include <iostream>
+#include <cstdlib> // Để sử dụng hàm abs
+
+using namespace std;
+
+// Hàm tính ước số chung lớn nhất (ƯCLN) bằng thuật toán Euclid
+int gcd(int a, int b) {
+    // Sử dụng thuật toán Euclid để tìm ƯCLN
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+// Hàm tính bội số chung nhỏ nhất (BCNN)
+int lcm(int a, int b) {
+    if (a == 0 || b == 0) {
+        return 0;
+    }
+    return abs(a * b) / gcd(a, b);
+}
+
+int main() {
+    int a, b;
+    cin >> a >> b;
+
+    cout << lcm(a, b) << endl;
+
+    return 0;
+}
