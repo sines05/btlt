@@ -1,0 +1,73 @@
+Viết chương trình nhập một chuỗi số nguyên tối đa 10000 phần tử, tìm xem trong đó có bộ ba số nào có tổng bằng 0 hay không. In ra tất cả các bộ số đó.
+
+Đầu vào
+Dòng đầu là số nguyên n(n<=10000)
+
+Dòng tiếp theo chứa n số nguyên cách nhau bởi dấu cách.
+Đầu ra
+Mỗi dòng là một bộ số có tổng bằng 0, sắp xếp theo thứ tự số nhỏ trước, số lớn sau.
+
+Các dòng sắp theo thứ tự tăng dần của số đầu tiên, rồi đến tăng dần của số thứ hai.
+
+Lưu ý
+Hai bộ số nếu giống nhau về giá trị nhưng khác nhau về thứ tự thì chỉ coi là một bộ số và chỉ in ra một lần duy nhất.
+For example:
+Input	
+5
+3 -4 1 0 -3
+Result: 
+-4 1 3
+-3 0 3
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+void findTriplets(vector<int>& arr, int n) {
+    sort(arr.begin(), arr.end());
+    vector<vector<int>> result;
+
+    for (int i = 0; i < n - 2; i++) {
+        if (i > 0 && arr[i] == arr[i-1]) {
+            continue; // tránh trùng lặp bộ ba bắt đầu bằng cùng một số
+        }
+        int left = i + 1;
+        int right = n - 1;
+        
+        while (left < right) {
+            int sum = arr[i] + arr[left] + arr[right];
+            if (sum == 0) {
+                result.push_back({arr[i], arr[left], arr[right]});
+                while (left < right && arr[left] == arr[left + 1]) left++; // tránh trùng lặp
+                while (left < right && arr[right] == arr[right - 1]) right--; // tránh trùng lặp
+                left++;
+                right--;
+            } else if (sum < 0) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+    }
+
+    for (const auto& triplet : result) {
+        for (int num : triplet) {
+            cout << num << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+    findTriplets(arr, n);
+    return 0;
+}
