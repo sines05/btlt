@@ -1,0 +1,47 @@
+Định nghĩa cấu trúc thời gian Time gồm có:
+Giờ, phút, giây tương ứng là h, m, s kiểu số nguyên (luôn dương).
+Hàm khởi tạo mặc định (gán giờ, phút, giây bằng 0), và hàm khởi tạo nhận vào ba số giờ, phút, giây.
+Hàm tính số giây int second() tương ứng với thời gian.
+Hàm void print() in ra thời gian theo định dạng hh:mm:ss
+ (ví dụ 08:20:10). In thêm dấu xuống dòng ở cuối.
+Định nghĩa hàm Time normalize(int h, int m, int s) chuẩn hoá thời gian:
+Nhận vào 3 biến nguyên.
+Chuẩn hoá nếu m, s lớn hơn 59
+(ví dụ 02:59:60 chuẩn hoá thành 03:00:00).
+Trả về biến thời gian đã chuẩn hoá.
+
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+struct Time {
+    int h, m, s;
+
+    // Hàm khởi tạo mặc định
+    Time() : h(0), m(0), s(0) {}
+
+    // Hàm khởi tạo với tham số
+    Time(int hour, int minute, int second) : h(hour), m(minute), s(second) {}
+
+    int second() {
+        return h * 3600 + m * 60 + s;
+    }
+    
+    void print() {
+        cout << setfill('0') << setw(2) << h << ":"
+             << setfill('0') << setw(2) << m << ":"
+             << setfill('0') << setw(2) << s << endl;
+    }
+};
+
+Time normalize(int h, int m, int s) {
+    if (s >= 60) {
+        m += s / 60;
+        s %= 60;
+    }
+    if (m >= 60) {
+        h += m / 60;
+        m %= 60;
+    }
+    return Time(h, m, s);
+}
