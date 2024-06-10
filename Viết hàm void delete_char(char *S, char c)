@@ -1,0 +1,18 @@
+Viết hàm void delete_char(char *S, char c) nhận vào xâu S và ký tự c, sau đó hàm này sẽ xóa hết các kí tự có giá trị bằng c trong xâu S. Ví dụ, hàm delete_char nhận vào xâu S="abcdac" và kí tự c='a' thì sau khi kết thúc hàm, S sẽ nhận giá trị là "bcdc".
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+void delete_char(char *S, char c) {
+    int len = strlen(S);
+    int j = 0; // Chỉ số cho vị trí mới của xâu S
+
+    // Duyệt qua từng ký tự trong xâu S
+    for (int i = 0; i < len; ++i) {
+        if (S[i] != c) {
+            S[j++] = S[i];
+        }
+    }
+    S[j] = '\0'; // Kết thúc xâu mới
+}
