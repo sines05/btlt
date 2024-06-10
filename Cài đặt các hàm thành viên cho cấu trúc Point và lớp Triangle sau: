@@ -1,0 +1,72 @@
+Cài đặt các hàm thành viên cho cấu trúc Point và lớp Triangle sau:
+
+struct Point 
+{
+    double x, y;  // Toạ độ x, y
+    Point(); // Hàm khởi tạo điểm (0, 0)
+    Point(double, double); // Hàm khởi tạo từ toạ độ x, y
+    Point(const Point&); // Hàm khởi tạo sao chép từ một thực thể (instance) Point khác
+};
+
+class Triangle 
+{
+    Point p1, p2, p3;
+public:
+    Triangle(const Point& , const Point& ,  const Point &); // Hàm khởi tạo tam giác từ 3 điểm
+    double getPerimeter() const;  // Hàm trả về chu vi tam giác
+    double getArea() const;  // Hàm trả về diện tích tam giác
+    // Từ khoá const ở cuối đảm bảo hàm không làm thay đổi các biến thành viên p1, p2, p3
+};
+
+
+Point::Point()
+{
+    // Your code here
+    x = 0;
+    y = 0;
+}
+    
+Point::Point(double x_, double y_)
+{
+    // Your code here
+    x = x_;
+    y = y_;
+}
+    
+Point::Point(const Point& p)
+{
+    // Your code here
+    x = p.x;
+    y=p.y;
+}
+
+
+Triangle::Triangle(const Point& p1_, const Point& p2_, const Point& p3_)
+{
+    // Your code here
+    p1 = p1_;
+    p2 = p2_;
+    p3 = p3_;
+    
+}
+    
+double distance(const Point& a, const Point& b) {
+    return std::sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+}
+
+double Triangle::getPerimeter() const
+{
+    double side1 = distance(p1, p2);
+    double side2 = distance(p2, p3);
+    double side3 = distance(p1, p3);
+    return side1 + side2 + side3;
+}
+
+double Triangle::getArea() const
+{
+    double side1 = distance(p1, p2);
+    double side2 = distance(p2, p3);
+    double side3 = distance(p1, p3);
+    double s = getPerimeter() / 2; // Nửa chu vi tam giác
+    return std::sqrt(s * (s - side1) * (s - side2) * (s - side3));
+}
