@@ -1,0 +1,34 @@
+Số chính phương là số tự nhiên là bình phương của một số tự nhiên khác.
+
+Viết chương trình kiểm tra số nguyên n nhập từ bàn phím có phải là số chính phương hay không. Nếu đúng, in ra màn hình YES, ngược lại, in ra NO.
+
+Đầu vào
+Một dòng gồm duy nhất một số nguyên n
+Đầu ra
+Một dòng là xâu "YES" hoặc "NO" theo yêu cầu của đề bài
+
+#include <iostream>
+#include <cmath>
+
+int main() {
+    int n;
+    std::cin >> n;
+
+    // Kiểm tra số âm không thể là số chính phương
+    if (n < 0) {
+        std::cout << "NO" << std::endl;
+        return 0;
+    }
+
+    // Tính căn bậc hai của n
+    int sqrtn = std::sqrt(n);
+
+    // Nếu bình phương của căn bậc hai vừa tính ra bằng chính n, thì n là số chính phương
+    if (sqrtn * sqrtn == n) {
+        std::cout << "YES" << std::endl;
+    } else {
+        std::cout << "NO" << std::endl;
+    }
+
+    return 0;
+}
