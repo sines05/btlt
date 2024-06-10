@@ -1,0 +1,92 @@
+Dựng lớp Complex biểu diễn số phức với các hàm tính toán trên số phức như sau:
+
+class Complex {
+    double a, b;
+public:
+    Complex(double a = 0, double b = 0);
+    friend ostream& operator<<(ostream& os, const Complex& f)
+    Complex operator+(const Complex& f) const;
+    Complex operator-(const Complex& f) const;
+    Complex operator*(const Complex& f) const;
+    Complex operator/(const Complex& f) const;
+    double modulus() const;
+    bool operator==(const Complex& f) const;
+    bool operator!=(const Complex& f) const;
+};
+
+Trong đó:
+
+Hàm Complex operator+(const Complex& f) const trả về kết quả là tổng của số phức hiện tại với số phức f. Hàm này không thay đổi giá trị của số phức hiện tại.
+Hàm Complex operator-(const Complex& f) const trả về kết quả là hiệu của số phức hiện tại với số phức f. Hàm này không thay đổi giá trị của số phức hiện tại.
+Hàm Complex operator*(const Complex& f) const trả về kết quả là tích của số phức hiện tại với số phức f. Hàm này không thay đổi giá trị của số phức hiện tại.
+Hàm Complex operator/(const Complex& f) const trả về kết quả là thương của số phức hiện tại với số phức f. Hàm này không thay đổi giá trị của  số phức hiện tại.
+Hàm double modulus() const trả về kết quả là mô đun của số phức hiện tại. Hàm này không thay đổi giá trị của số phức hiện tại.
+Hàm bool operator==(const Complex& f) const trả về true nếu số phức hiện tại bằng số phức f, ngược lại trả về false.
+Hàm bool operator!=(const Complex& f) const trả về true nếu số phức hiện tại khác số phức f, ngược lại trả về false.
+Hàm friend ostream& operator<<(ostream& os, const Complex& f) in ra số phức dưới dạng a+bi nếu b>0 hoặc a−bi nếu b<0. Nếu a hoặc b bằng 0 thì lược bỏ phần có chứa nó.
+
+
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+class Complex {
+    double a, b; // Phần thực là a, phần ảo là b.
+
+public:
+    // Constructor với giá trị mặc định là 0.
+    Complex(double a = 0, double b = 0) : a(a), b(b) {}
+
+    // Operator + để cộng hai số phức.
+    Complex operator+(const Complex& f) const {
+        return Complex(a + f.a, b + f.b);
+    }
+    
+    // Operator - để trừ hai số phức.
+    Complex operator-(const Complex& f) const {
+        return Complex(a - f.a, b - f.b);
+    }
+
+    // Operator * để nhân hai số phức.
+    Complex operator*(const Complex& f) const {
+        return Complex(a * f.a - b * f.b, a * f.b + b * f.a);
+    }
+
+    // Operator / để chia hai số phức.
+    Complex operator/(const Complex& f) const {
+        double denominator = f.a * f.a + f.b * f.b;
+        return Complex((a * f.a + b * f.b) / denominator, (b * f.a - a * f.b) / denominator);
+    }
+
+    // Tính mô đun của số phức.
+    double modulus() const {
+        return sqrt(a * a + b * b);
+    }
+
+    // So sánh bằng.
+    bool operator==(const Complex& f) const {
+        return a == f.a && b == f.b;
+    }
+
+    // So sánh khác.
+    bool operator!=(const Complex& f) const {
+        return !(*this == f);
+    }
+
+    // Hàm bạn để in số phức.
+    friend ostream& operator<<(ostream& os, const Complex& f) {
+        if (f.a != 0) {
+            os << f.a;
+        }
+        if (f.b > 0) {
+            if (f.a != 0) {
+                os << '+';
+            }
+            os << f.b << 'i';
+        } else if (f.b < 0) {
+            os << f.b << 'i';
+        }
+        return os;
+    }
+};
