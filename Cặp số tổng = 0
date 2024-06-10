@@ -1,0 +1,60 @@
+Viết chương trình nhập một chuỗi số nguyên tối đa 10000 phần tử, tìm xem trong đó có cặp số nào có tổng bằng 0 hay không. In ra tất cả các cặp số đó.
+Đầu vào
+Dòng đầu là số nguyên n<=10000
+Dòng tiếp theo chứa n số nguyên cách nhau bởi dấu cách.
+Đầu ra
+Mỗi dòng là một cặp số có tổng bằng 0, sắp xếp theo thứ tự số nhỏ trước, số lớn sau. Các dòng sắp theo thứ tự tăng dần của số đầu tiên. 
+
+
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    vector<int> seen;          
+    vector<pair<int, int>> pairs;
+    int zeroCount = 0;
+    
+  
+    for (int i = 0; i < n; i++) {
+        int num = arr[i];
+        if (num == 0) {
+            zeroCount++;
+        } else {
+            for (size_t j = 0; j < seen.size(); j++) {
+                if (seen[j] == -num) {
+                    pairs.push_back(minmax(num, -num));
+                }
+            }
+        }
+        seen.push_back(num);
+    }
+
+   
+    if (zeroCount > 1) {
+        for (int i = 0; i < zeroCount * (zeroCount - 1) / 2; ++i) {
+            pairs.push_back(make_pair(0, 0));
+        }
+    }
+    
+
+    sort(pairs.begin(), pairs.end());
+
+ 
+    for (const auto& p : pairs) {
+        cout << p.first << " " << p.second << endl;
+    }
+
+    return 0;
+}
