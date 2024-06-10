@@ -1,0 +1,47 @@
+Viết chương trình in ra tất cả các tập hợp gồm K phần tử gồm các chữ cái khác nhau trong phạm vi N chữ cái tiếng Anh bắt đầu từ a
+
+Đầu vào:
+Hai số nguyên dương N và K được ngăn cách với nhau bởi khoảng trắng.
+Đầu ra:
+Tất cả các tập hợp gồm K phần tử gồm các chữ cái khác nhau trong phạm vi N chữ cái tiếng Anh bắt đầu từ a
+Mỗi tập hợp in trên một dòng;
+Các tập hợp in theo thứ tự từ điển, các chữ cái trong tập hợp ở dạng chữ thường và sắp xếp theo thứ tự từ điển.
+
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+void generateCombinations(vector<char>& letters, int K, int start, string current, vector<string>& result) {
+    if (current.length() == K) {
+        result.push_back(current);
+        return;
+    }
+    for (int i = start; i < letters.size(); i++) {
+        generateCombinations(letters, K, i + 1, current + letters[i], result);
+    }
+}
+
+int main() {
+    int N, K;
+    cin >> N >> K;
+
+    vector<char> letters;
+    for (int i = 0; i < N; i++) {
+        letters.push_back('a' + i);
+    }
+
+    vector<string> result;
+    generateCombinations(letters, K, 0, "", result);
+
+    sort(result.begin(), result.end());
+
+    for (const string& comb : result) {
+        cout << comb  << endl;
+    }
+
+    return 0;
+}
