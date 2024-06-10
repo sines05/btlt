@@ -1,0 +1,45 @@
+1 số được gọi là hoàn hảo K nếu tổng các chữ số của nó chia hết cho K. Cho trước dãy số gồm N số và số K, yêu cầu xác định số lượng số trong dãy là số hoàn hảo K. 
+
+
+
+Đầu vào:
+
+1 dòng chứa 2 số nguyên N và Kcách nhau bởi 1 dấu cách
+
+Dòng tiếp theo chứa N số cách nhau bởi dấu cách.
+
+Đầu ra:
+
+1 số nguyên duy nhất là số lượng số là số hoàn hảo K.
+
+
+#include <iostream>
+#include <vector>
+
+int sumOfDigits(int number) {
+    int sum = 0;
+    while (number > 0) {
+        sum += number % 10;
+        number /= 10;
+    }
+    return sum;
+}
+
+int main() {
+    int N, K, count = 0;
+    std::cin >> N >> K;
+    std::vector<int> numbers(N);
+
+    for (int i = 0; i < N; i++) {
+        std::cin >> numbers[i];
+    }
+
+    for (int number : numbers) {
+        if (sumOfDigits(number) % K == 0) {
+            count++;
+        }
+    }
+
+    std::cout << count;
+    return 0;
+}
