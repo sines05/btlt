@@ -1,0 +1,36 @@
+Viết chương trình nhập vào một dãy số gồm số nguyên. Kiểm tra xem số nào là số xuất hiện nhiều nhất.
+
+Đầu vào: Nsố nguyên a_i cách nhau bởi dấu cách.
+
+Đầu ra: In ra màn hình số xuất hiện nhiều nhất. Nếu có nhiều số thoả mãn, in ra số nhỏ nhất
+
+#include <iostream>
+#include <map>
+#include <climits>
+
+int main() {
+    std::map<int, int> frequency;
+    int number;
+
+
+    while (std::cin >> number) {
+        frequency[number]++;
+    }
+
+    int maxFrequency = 0;
+    int mostFrequentNumber = INT_MAX;
+    
+    for (auto& kv : frequency) {
+        if (kv.second > maxFrequency) {
+            maxFrequency = kv.second;
+            mostFrequentNumber = kv.first;
+        } else if (kv.second == maxFrequency && kv.first < mostFrequentNumber) {
+            // Nếu tần suất bằng nhau nhưng số hiện tại nhỏ hơn số đã ghi nhận thì cập nhật lại
+            mostFrequentNumber = kv.first;
+        }
+    }
+    
+    std::cout << mostFrequentNumber << std::endl;
+
+    return 0;
+}
