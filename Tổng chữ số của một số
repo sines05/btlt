@@ -1,0 +1,30 @@
+Viết chương trình tính tổng các chữ số của 1 số nguyên dương N được nhập vào từ bàn phím.
+Đầu vào
+Một dòng gồm duy nhất một số nguyên dương N
+Đầu ra
+Một dòng gồm duy nhất một số là tổng các chữ số của N
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+   
+    long long N;
+   
+    cin >> N;
+
+   
+    int sum = 0;
+
+   
+    while (N > 0) {
+        sum += N % 10;
+        N /= 10;
+    }
+
+   
+    cout << sum << endl;
+
+    return 0;
+}
