@@ -1,0 +1,40 @@
+Viết chương trình vẽ hình tam giác vuông rỗng.
+
+Đầu vào: Một số nguyên dương m là chiều cao cần vẽ.
+
+Đầu ra: In ra màn hình một hình tam giác vuông rỗng sử dụng dấu sao (*). Như ví dụ bên dưới.
+For example:
+Input	Result
+4
+*
+**
+* *
+****
+5
+*
+**
+* *
+*  *
+*****
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int m;
+    cin >> m;
+
+    for (int i = 1; i <= m; ++i) {
+        for (int j = 1; j <= i; ++j) {
+            if (i == 1 || i == m || j == 1 || j == i) {
+                cout << "*";
+            } else {
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
