@@ -1,0 +1,53 @@
+Viết chương trình tìm giá trị lớn nhất và nhỏ nhất của một dãy gồm n số thực nhập vào từ bàn phím.
+
+Đầu vào
+Gồm 2 dòng:
+
+Dòng đầu tiên chứa số nguyên n là số phần tử của dãy số.
+Dòng thứ hai gồm n số thực.
+Đầu ra
+In ra 2 dòng:
+
+Dòng đầu là giá trị lớn nhất của dãy số.
+Dòng hai là giá trị nhỏ nhất của dãy số.
+Thử sức
+Gợi ý
+Suy nghĩ đầu tiên khi làm bài này là sử dụng mảng để lưu dãy số. Tuy nhiên, bạn thử nghĩ cách làm chỉ dùng các biến kiểu cơ bản, không dùng mảng, string, hay các cấu trúc dữ liệu khác.
+
+
+
+
+
+#include <iostream>
+#include <limits>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    if (n <= 0) {
+        cerr << "So phan tu phai lon hon 0" << endl;
+        return 1;
+    }
+
+    double number;
+    double maxNumber = -numeric_limits<double>::infinity(); // Khởi tạo giá trị lớn nhất là âm vô cực
+    double minNumber = numeric_limits<double>::infinity();  // Khởi tạo giá trị nhỏ nhất là dương vô cực
+
+    for (int i = 0; i < n; ++i) {
+        cin >> number;
+        if (number > maxNumber) {
+            maxNumber = number;
+        }
+        if (number < minNumber) {
+            minNumber = number;
+        }
+    }
+
+    cout << maxNumber << endl;
+    cout << minNumber << endl;
+
+    return 0;
+}
