@@ -1,0 +1,42 @@
+Viết chương trình nhập một số nguyên dương N và in ra một tam giác cân ngược bằng các dấu sao trên N
+ dòng (xem ví dụ).
+
+Đầu vào
+Một dòng gồm duy nhất một số nguyên N
+Đầu ra
+N dòng biểu diễn một tam giác cân ngược bằng các dấu sao (xem ví dụ)
+
+For example:
+
+Input	Result
+3
+*****
+ ***
+  *
+
+
+#include <iostream>
+
+int main() {
+    int N;
+    
+    std::cin >> N;
+
+    // Vòng lặp xác định từng dòng
+    for (int i = 0; i < N; ++i) {
+        // In ra dấu cách trước các dấu *
+        for (int j = 0; j < i; ++j) {
+            std::cout << " ";
+        }
+        
+        // In ra dấu * với quy tắc số lượng giảm dần
+        for (int k = 0; k < 2 * (N - i) - 1; ++k) {
+            std::cout << "*";
+        }
+        
+        // Xuống dòng sau mỗi lần in xong 1 dòng
+        std::cout << std::endl;
+    }
+
+    return 0;
+}
