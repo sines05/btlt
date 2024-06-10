@@ -1,0 +1,91 @@
+Thiết kế lớp Time để biểu diễn thời gian trong ngày thoả mãn các yêu cầu sau:
+
+Cho phép tạo thời gian từ ba tham số nguyên giờ, phút, giây
+Cho phép tạo thời gian từ hai tham số nguyên giờ, phút
+Cho phép tạo thời gian từ một tham số nguyên giờ
+Có thể dùng lệnh cout để in ra màn hình theo định dạng hh:mm:ss (ví dụ 08:20:10), chuẩn hoá lại giờ, phút, giây nếu phút hoặc/và giây lớn hơn 59. 
+Các biến kiểu Time có thể so sánh với nhau (lớn hơn, nhỏ hơn, bằng, khác, lớn hơn hoặc bằng, nhỏ hơn hoặc bằng).
+Có hàm thành viên int hour() trả về giờ hiện tại
+Có hàm thành viên int minute() trả về phút hiện tại
+Có hàm thành viên int second() trả về giây hiện tại
+
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+class Time {
+private:
+    int h;  // Giờ
+    int m;  // Phút
+    int s;  // Giây
+
+    // Hàm chuẩn hóa giờ, phút, giây
+    void normalize() {
+        if (s >= 60) {
+            m += s / 60;
+            s = s % 60;
+        }
+        if (m >= 60) {
+            h += m / 60;
+            m = m % 60;
+        }
+        if (h >= 24) {
+            h = h % 24;
+        }
+    }
+
+public:
+    // Hàm khởi tạo từ ba tham số
+    Time(int hour = 0, int minute = 0, int second = 0) : h(hour), m(minute), s(second) {
+        normalize();
+    }
+
+    // Toán tử in ra màn hình
+    friend ostream& operator<<(ostream& os, const Time& t) {
+        os << setfill('0') << setw(2) << t.h << ":"
+           << setfill('0') << setw(2) << t.m << ":"
+           << setfill('0') << setw(2) << t.s;
+        return os;
+    }
+
+    // Toán tử so sánh
+    bool operator<(const Time& other) const {
+        return (h < other.h) || (h == other.h && m < other.m) || (h == other.h && m == other.m && s < other.s);
+    }
+
+    bool operator<=(const Time& other) const {
+        return *this < other || *this == other;
+    }
+
+    bool operator>(const Time& other) const {
+        return !(*this <= other);
+    }
+
+    bool operator>=(const Time& other) const {
+        return !(*this < other);
+    }
+
+    bool operator==(const Time& other) const {
+        return h == other.h && m == other.m && s == other.s;
+    }
+
+    bool operator!=(const Time& other) const {
+        return !(*this == other);
+    }
+
+    // Hàm thành viên trả về giờ hiện tại
+    int hour() const {
+        return h;
+    }
+
+    // Hàm thành viên trả về phút hiện tại
+    int minute() const {
+        return m;
+    }
+
+    // Hàm thành viên trả về giây hiện tại
+    int second() const {
+        return s;
+    }
+};
