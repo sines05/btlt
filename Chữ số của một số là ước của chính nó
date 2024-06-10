@@ -1,0 +1,49 @@
+Cho một số nguyên I, các chữ số của nó được kí hiệu lần lượt là (d1,d2,...,dn). Hãy tính xem có bao nhiêu chữ số của N là ước của chính nó.
+
+Lưu ý: Mỗi chữ số là duy nhất và phân biệt nên mỗi sự lặp lại của chúng được tính như một giá trị riêng biệt.
+
+Ví dụ: N=11, đầu ra 3
+
+Đầu vào: 
+Dòng đầu tiên chứa số nguyên Nlà số lượng số nguyên cần kiểm tra;
+ N dòng tiếp theo mỗi dòng chứa một số nguyên I
+Đầu ra: 
+Với mỗi số nguyên, đếm và in ra số lượng các chữ số chia hết cho I, mỗi kết quả trên một dòng.
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int countDivisibleDigits(int number) {
+    string numStr = to_string(number);
+    int count = 0;
+    
+    for (char digitChar : numStr) {
+        int digit = digitChar - '0';
+        if (digit != 0 && number % digit == 0) {
+            count++;
+        }
+    }
+    
+    return count;
+}
+
+int main() {
+    int N;
+    cin >> N;
+
+    vector<int> results;
+    for (int i = 0; i < N; ++i) {
+        int I;
+        cin >> I;
+        results.push_back(countDivisibleDigits(I));
+    }
+
+    for (int result : results) {
+        cout << result << endl;
+    }
+
+    return 0;
+}
