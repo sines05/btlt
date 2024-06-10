@@ -1,0 +1,54 @@
+Viết chương trình nhập vào một dãy số gồm N phần tử, mỗi phần tử trong khoảng từ 0 đến 9. Kiểm tra xem giá trị số nào không xuất hiện.
+
+Đầu vào:
+
+Dòng đầu tiên chứa N(N<=100) là số lượng phần tử của dãy.
+Dòng thứ 2 chứa Nsố nguyên a_i cách nhau bởi dấu cách (0<=ai<=9)
+
+
+Đầu ra: In ra màn hình danh sách các số không xuất hiện trong dãy sắp xếp từ nhỏ đến lớn và cách nhau bởi dấu cách. Nếu tất cả các số đều xuất hiện thì in ra "None".
+
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int N;
+    cin >> N;
+
+    if (N <= 0 || N > 100) {
+        cerr << "So phan tu phai lon hon 0 va nho hon hoac bang 100" << endl;
+        return 1;
+    }
+
+    vector<int> numbers(N);
+    bool appeared[10] = {false}; // Mảng đánh dấu cho các số từ 0 đến 9
+
+    for (int i = 0; i < N; ++i) {
+        cin >> numbers[i];
+        if (numbers[i] < 0 || numbers[i] > 9) {
+            cerr << "Gia tri cua cac phan tu phai nam trong khoang tu 0 den 9" << endl;
+            return 1;
+        }
+        appeared[numbers[i]] = true; // Đánh dấu số đã xuất hiện
+    }
+
+    bool allAppeared = true;
+    for (int i = 0; i < 10; ++i) {
+        if (!appeared[i]) {
+            cout << i << " ";
+            allAppeared = false;
+        }
+    }
+
+    if (allAppeared) {
+        cout << "None";
+    }
+
+    cout << endl;
+
+    return 0;
+}
+
