@@ -1,0 +1,44 @@
+Cho hai số A và B
+. Hãy viết chương trình đếm tất cả các số đối gương N thỏa mãn A≤N≤B
+Ví dụ:
+
+Các số đối gương: 11, 121, 2112.
+Các số không đối gương: 122, 324.
+Đầu vào:
+Dòng đầu chứa số tự nhiên T
+𝑇
+ là số test case (1≤T≤100) dòng tiếp theo, mỗi dòng chứa hai giá trị A và B trên cùng một dòng (0≤A≤B≤105)
+Đầu ra:
+Gồm T dòng , mỗi dòng chứa số lượng số đối gương ứng với mỗi test case.
+
+
+#include <iostream>
+#include <string>
+
+// Hàm kiểm tra số đối gương
+bool isPalindrome(int n) {
+    std::string s = std::to_string(n);
+    int length = s.length();
+    for (int i = 0; i < length / 2; i++) {
+        if (s[i] != s[length - i - 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    int T, A, B;
+    std::cin >> T; // Đọc số lượng test case
+    while (T--) {
+        std::cin >> A >> B;
+        int count = 0;
+        for (int i = A; i <= B; i++) {
+            if (isPalindrome(i)) {
+                count++;
+            }
+        }
+        std::cout << count << std::endl; // In ra số lượng số đối gương cho mỗi test case
+    }
+    return 0;
+}
