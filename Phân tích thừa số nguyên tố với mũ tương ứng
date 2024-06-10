@@ -1,0 +1,47 @@
+Nhập vào 1 số nguyên dương n (n <= 1000). Phân tích số n ra tích của các thừa số số nguyên tố. In ra các thừa số nguyên tố và số mũ tương ứng.
+
+Giải thích:
+
+Input: 200 = 2^3 * 5^2
+
+=> Output: 
+
+2 3
+5 2
+
+#include <iostream>
+#include <map>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    if (n <= 0 || n > 1000) {
+        cerr << "Nhap vao so nguyen duong n (n <= 1000)" << endl;
+        return 1;
+    }
+
+    map<int, int> primeFactors;
+
+    // Phân tích số n ra các thừa số nguyên tố
+    for (int i = 2; i * i <= n; ++i) {
+        while (n % i == 0) {
+            primeFactors[i]++;
+            n /= i;
+        }
+    }
+
+    // Nếu n là số nguyên tố lớn hơn 1
+    if (n > 1) {
+        primeFactors[n]++;
+    }
+
+    // In kết quả
+    for (const auto& factor : primeFactors) {
+        cout << factor.first << " " << factor.second << endl;
+    }
+
+    return 0;
+}
