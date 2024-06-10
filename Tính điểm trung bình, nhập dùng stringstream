@@ -1,0 +1,57 @@
+Viết chương trình tính điểm trung bình cho các môn học. Chương trình cho phép nhập vào điểm số của từng môn học trong khoảng từ 0 ... 10. Nếu điểm số nhập vào của một môn lớn hơn 10 thì nhập lại điểm số của môn đó. Nếu điểm số nhỏ hơn 0 thì in ra điểm trung bình và kết thúc chương trình.
+Đầu vào
+
+Một dòng duy nhất chứa các điểm số cách nhau bởi dấu cách. 
+
+Ví dụ: đầu vào là
+7 11 2.5 3.5 -5
+thì điểm môn thứ nhất là 7, điểm môn thứ 2 là 2.5, điểm môn thứ 3 là 3.5, điểm trung bình là (7+2.5+3.5)/3=4.33
+Đầu ra
+
+In ra giá trị điểm trung bình, làm tròn đến hai dấu thập phân sau dấu phẩy.
+
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <iomanip>
+
+using namespace std;
+
+int main() {
+    string inputLine;
+    vector<double> scores;
+    double score;
+
+    // Đọc dòng duy nhất chứa các điểm số từ đầu vào
+    getline(cin, inputLine);
+    stringstream ss(inputLine);
+
+
+    while (ss >> score) {
+        // Nếu điểm số nhỏ hơn 0, kết thúc chương trình và tính điểm trung bình
+        if (score < 0) {
+            break;
+        }
+        
+        if (score > 10) {
+            continue;
+        }
+
+        scores.push_back(score);
+    }
+
+    // Tính điểm trung bình nếu có ít nhất một điểm số hợp lệ
+    if (!scores.empty()) {
+        double sum = 0;
+        for (double s : scores) {
+            sum += s;
+        }
+        double average = sum / scores.size();
+        // In ra giá trị điểm trung bình, làm tròn đến hai dấu thập phân sau dấu phẩy
+        cout << fixed << setprecision(2) << average << endl;
+    } else {
+        cout << "Không có điểm số hợp lệ để tính điểm trung bình." << endl;
+    }
+
+    return 0;
+}
