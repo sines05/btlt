@@ -1,0 +1,27 @@
+Cô giáo yêu cầu các học sinh của mình mở một cuốn sách đang đóng gồm N trang tới trang p.  Học sinh có thể mở từ phía trước (bắt đầu từ trang 1) hoặc mở từ phía sau (bắt đầu từ trang N) .  Biết rằng các học sinh này lật từng tờ một và trang 1 luôn nằm ở phía bên phải của cuốn sách.
+Mỗi tờ gồm 2 trang ngoại trừ tờ cuối cùng có thể chỉ có một trang.
+
+Viết chương trình in ra số tờ nhỏ nhất cần lật để tới được trang p
+
+Đầu vào
+Gồm hai nguyên dương N và p , trong đó N là số trang của cuốn sách và p là vị trí trang cần lật tới
+Đầu ra:
+Số tờ nhỏ nhất cần lật để tới được trang p
+
+#include <iostream>
+#include <cmath>
+
+int main() {
+    int N, p;
+
+    std::cin >> N >> p;
+
+    int from_front = p / 2;
+    int from_back = (N / 2) - (p / 2);
+
+    int min_turns = std::min(from_front, from_back);
+
+    std::cout << min_turns << std::endl;
+
+    return 0;
+}
