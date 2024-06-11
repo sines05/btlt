@@ -1,0 +1,77 @@
+Viết chương trình đọc từ bàn phím một số nguyên trong khoảng từ −999.999.999 tới 999.999.999 và in ra cách đọc số đó bằng tiếng Anh.
+
+Lưu ý: Bạn cần dùng đến các từ: negative, zero, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety, hundred, thousand, million.
+
+Đầu vào
+Một dòng gồm duy nhất một số nguyên trong khoảng từ −999.999.999 tới 999.999.999
+
+
+Đầu ra
+In ra một dòng là cách đọc số đó bằng tiếng Anh.
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string ones[] = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+string teens[] = {"", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+string tens[] = {"", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+string thousands[] = {"", "thousand", "million"};
+
+string convertHundreds(int num) {
+    string result;
+
+    if (num >= 100) {
+        result += ones[num / 100] + " hundred";
+        num %= 100;
+        if (num != 0) result += " ";
+    }
+    if (num >= 20) {
+        result += tens[num / 10];
+        num %= 10;
+        if (num != 0) result += "-" + ones[num];
+    } else if (num > 10) {
+        result += teens[num - 10];
+    } else if (num == 10) {
+        result += tens[1];
+    } else {
+        result += ones[num];
+    }
+    return result;
+}
+
+string convertToWords(int num) {
+    if (num == 0) return "zero";
+    if (num < 0) return "negative " + convertToWords(-num);
+
+    string result;
+    int thousandCounter = 0;
+
+    while (num > 0) {
+        if (num % 1000 != 0) {
+            string segment = convertHundreds(num % 1000);
+            if (!segment.empty()) {
+                segment += " " + thousands[thousandCounter];
+            }
+            if (!result.empty() && !segment.empty()) {
+                result = segment + " " + result;
+            } else {
+                result = segment + result;
+            }
+        }
+        num /= 1000;
+        thousandCounter++;
+    }
+    return result;
+}
+
+int main() {
+    int num;
+    cin >> num; // Đọc số nguyên từ đầu vào
+
+    cout << convertToWords(num) << endl; // In ra cách đọc số đó bằng tiếng Anh
+
+    return 0;
+}
