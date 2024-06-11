@@ -1,0 +1,7 @@
+Hàm rand() trong thư viện <stdlib.h> trả về một số nguyên ngẫu nhiên. Sử dụng hàm này để viết hàm int myRandom(int n) trả về một số ngẫu nhiên nhỏ hơn n (với n là tham số được truyền vào hàm).
+
+#include <stdlib.h> 
+
+int myRandom(int n) {
+    return rand() % n; 
+}
