@@ -1,0 +1,42 @@
+Một mảng A gồm N  phần tử. Trong mảng A phần tử tại vị trí thứ i trỏ đến một mảng gồm k_i phần tử.
+Mỗi truy vấn trên mảng Acó định dạng i, trong đó i là chỉ mục tới vị trí trong mảng A và j là chỉ mục tới vị trí trong mảng A[i].
+Viết chương trình in ra giá trị tương ứng với mỗi truy vấn được nhập từ bàn phím. Biết rằng các truy vấn này luôn hợp lệ.
+
+Đầu vào
+Dòng đầu tiên gồm 2 số nguyên N và Q,  N là số lượng phần tử của mảng A và Q là số lượng truy vấn (1≤N,Q), N dòng tiếp theo, mỗi dòng đại diện cho một mảng con được trỏ đến bởi các phần tử của mảng A
+. Mỗi dòng gồm phần tử đầu tiên là độ dài mảng, các phần tử tiếp theo là các phần tử của mảng.
+
+Q dòng tiếp theo, mỗi dòng gồm hai giá trị ij tương ứng với các truy vấn trên mảng A.
+Đầu ra:
+Q dòng, mỗi dòng là giá trị tại vị trí tương ứng với mỗi truy vấn trên mảng A
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int N, Q;
+    cin >> N >> Q; // Đọc số lượng phần tử của mảng A và số lượng truy vấn
+
+    vector<vector<int>> A(N); // Khởi tạo mảng A chứa N mảng con
+
+    // Đọc các mảng con
+    for (int i = 0; i < N; ++i) {
+        int k;
+        cin >> k; // Đọc độ dài của mảng con
+        A[i].resize(k); // Đặt kích thước cho mảng con
+        for (int j = 0; j < k; ++j) {
+            cin >> A[i][j]; // Đọc các phần tử của mảng con
+        }
+    }
+
+    // Xử lý các truy vấn
+    for (int q = 0; q < Q; ++q) {
+        int i, j;
+        cin >> i >> j; // Đọc chỉ mục i và j cho truy vấn
+        cout << A[i][j] << endl; // In ra giá trị tương ứng với truy vấn
+    }
+
+    return 0;
+}
