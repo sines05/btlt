@@ -1,0 +1,37 @@
+Viết chương trình nhập vào ba số Min, Max và Step_size, sau đó chuyển đổi nhiệt độ từ nhiệt độ F sang nhiệt độ C và K bắt đầu từ Min, kết thúc ở Max và nhảy theo Step_size.
+
+Nhắc lại cách chuyển đổi nhiệt độ: Để chuyển đổi nhiệt độ dưới dạng độ F (Fahrenheit) sang nhiệt độ dưới dạng độ C (Celsius), ta trừ cho 32, nhân 5 sau đó chia cho 9. Để chuyển đổi nhiệt độ dưới dạng độ C (Celsius) sang nhiệt độ dưới dạng độ K (Kelvin), ta cộng thêm 273.15.
+
+Đầu vào
+3 số thực Min, Max, Step_size lần lượt theo thứ tự (Step_size > 0)
+
+Đầu ra
+Danh sách nhiệt độ F tăng dần từ nhiệt độ Min và không vượt quá Max cùng các nhiệt độ C, K tương ứng lần lượt. Các giá trị nhiệt độ cách nhau bởi dấu cách, có độ chính xác đến 2 chữ số sau dấu phẩy thập phân.
+
+#include <iostream>
+#include <iomanip>
+
+double fahrenheitToCelsius(double fahrenheit) {
+    return (fahrenheit - 32) * 5.0 / 9.0;
+}
+
+double celsiusToKelvin(double celsius) {
+    return celsius + 273.15;
+}
+
+int main() {
+    double Min, Max, Step_size;
+    
+   
+    std::cin >> Min >> Max >> Step_size;
+
+    std::cout << std::fixed << std::setprecision(2); // Đặt độ chính xác đến 2 chữ số thập phân
+
+    for (double F = Min; F <= Max; F += Step_size) {
+        double C = fahrenheitToCelsius(F);
+        double K = celsiusToKelvin(C);
+        std::cout << F << " " << C << " " << K << std::endl;
+    }
+
+    return 0;
+}
