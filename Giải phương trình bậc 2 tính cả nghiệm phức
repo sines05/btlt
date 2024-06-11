@@ -1,0 +1,65 @@
+Viết chương trình nhập vào 3 hệ số của một phương trình bậc hai. Giải phương trình bậc hai đó và in ra các nghiệm, có tính nghiệm phức.
+
+Đầu vào
+Đầu vào từ bàn phím gồm 3 số thực, phân tách nhau bởi dấu cách.
+
+Đầu ra
+In ra màn hình các nghiệm của phương trình bậc 2, mỗi nghiệm trên 1 dòng, từ nhỏ đến lớn, nếu 2 nghiệm giống nhau, chỉ in 1 lần.
+
+Nếu là nghiệm phức thì in phần thực và phần ảo cách nhau bởi dấu cách.
+
+Làm tròn đến chữ số thập phân thứ 2 sau dấu phẩy.
+
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+#include <set>
+#include <complex>
+
+using namespace std;
+
+void solveQuadraticEquation(double a, double b, double c) {
+    // Tính delta
+    double delta = b * b - 4 * a * c;
+
+    // Nếu delta >= 0, xử lý nghiệm thực
+    if (delta >= 0) {
+        set<double> realResults;
+        if (delta > 0) {
+            // Hai nghiệm thực phân biệt
+            double x1 = (-b + sqrt(delta)) / (2 * a);
+            double x2 = (-b - sqrt(delta)) / (2 * a);
+            realResults.insert(x1);
+            realResults.insert(x2);
+        } else {
+            // Một nghiệm thực duy nhất
+            double x = -b / (2 * a);
+            realResults.insert(x);
+        }
+
+        // In ra các nghiệm thực từ set
+        for (double root : realResults) {
+            cout << fixed << setprecision(2) << root << endl;
+        }
+    }
+
+    // Nếu delta < 0, xử lý nghiệm phức
+    if (delta < 0) {
+        double realPart = -b / (2 * a);
+        double imaginaryPart = sqrt(-delta) / (2 * a);
+        
+        // In nghiệm phức theo yêu cầu
+        cout << fixed << setprecision(2) << realPart << " " << -imaginaryPart << endl;
+        cout << fixed << setprecision(2) << realPart << " " << imaginaryPart << endl;
+    }
+}
+
+int main() {
+    double a, b, c;
+    cin >> a >> b >> c; // Đọc ba hệ số của phương trình bậc hai
+
+    // Giải phương trình bậc hai
+    solveQuadraticEquation(a, b, c);
+
+    return 0;
+}
