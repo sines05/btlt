@@ -1,0 +1,39 @@
+Cho hai dãy A và B chứa các số nguyên. Dãy B có tất các các phần tử của dãy A . Ngoài ra B còn có một phần tử mà A không có. Tìm phần tử đó.
+
+Đầu vào
+Dòng đầu tiên chứa số nguyên N<=100  chứa số lượng phần tử của dãy A
+
+Dòng thứ hai chứa N
+ số nguyên cách nhau bởi dấu cách, là các phần tử của dãy A
+
+Dòng thứ ba chứa N+1 số nguyên cách nhau bởi dấu cách, là các phần tử của dãy B.
+Giới hạn: Các phần tử trong A và B là các số nguyên từ 0 đến 100.
+Đầu ra
+Một dòng duy nhất chứa phần tử bí ẩn của dãy B
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+    cin >> N;
+    
+    int value, uniqueElement = 0;
+    
+    // XOR tất cả các phần tử trong dãy A
+    for (int i = 0; i < N; ++i) {
+        cin >> value;
+        uniqueElement ^= value;
+    }
+    
+    // XOR tất cả các phần tử trong dãy B
+    for (int i = 0; i < N + 1; ++i) {
+        cin >> value;
+        uniqueElement ^= value;
+    }
+    
+    // uniqueElement giờ chứa phần tử duy nhất
+    cout << uniqueElement << endl;
+    
+    return 0;
+}
