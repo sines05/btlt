@@ -1,0 +1,49 @@
+Cho một dãy các số nguyên dương, hãy viết chương trình tìm các số nguyên tố trong dãy đó.
+
+Đầu vào: 
+
+Dòng đầu tiên chứa một số nguyên dương n là số lượng các số trong dãy. n<=10^6
+Dòng tiếp theo chứa n số nguyên dương a_i
+ (2<=a_i<=10^6)  là các phần tử của dãy.
+Đầu ra: In ra màn hình các số nguyên tố trong dãy đầu vào, cách nhau bởi dấu cách, không thay đổi thứ tự xuất hiện.
+
+Gợi ý: Ban đầu tạo một mảng đánh dấu các số nguyên tố từ 2 đến 10^6. Sau đó dựa vào mảng này để tìm các số nguyên tố trong dãy số a_i
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Hàm Sàng Eratosthenes để đánh dấu các số nguyên tố
+void sieve(vector<bool> &isPrime, int maxLimit) {
+    isPrime[0] = isPrime[1] = false; // 0 và 1 không phải là số nguyên tố
+    for (int i = 2; i * i <= maxLimit; ++i) {
+        if (isPrime[i]) {
+            for (int j = i * i; j <= maxLimit; j += i) {
+                isPrime[j] = false;
+            }
+        }
+    }
+}
+
+int main() {
+    int n;
+    cin >> n; // Đọc số lượng phần tử trong dãy
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i]; // Đọc các số trong dãy
+    }
+
+    const int MAX_VAL = 1'000'000; // Giá trị tối đa của các phần tử trong dãy
+    vector<bool> isPrime(MAX_VAL + 1, true); // Khởi tạo mảng đánh dấu số nguyên tố
+
+    sieve(isPrime, MAX_VAL); // Gọi hàm Sàng Eratosthenes
+
+    for (int i = 0; i < n; ++i) {
+        if (isPrime[arr[i]]) {
+            cout << arr[i] << " "; // In ra các số nguyên tố trong dãy
+        }
+    }
+
+    return 0;
+}
