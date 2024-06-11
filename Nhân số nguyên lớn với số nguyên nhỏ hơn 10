@@ -1,0 +1,46 @@
+Viết chương trình nhân một số nguyên lớn được biểu diễn bằng string. với một số nguyên nhỏ hơn 10
+Đầu vào: Hai số nguyên dương a và b
+ cách nhau bởi dấu cách  (0≤a≤10^100;0<b<10)
+
+Đầu ra: Tích của hai số đầu vào.
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string multiplyLargeNumber(const string &a, int b) {
+    if (b == 0) return "0"; // Nếu b là 0, kết quả sẽ là 0
+
+    int carry = 0;
+    string result = "";
+
+    // Thực hiện phép nhân từ chữ số cuối cùng của chuỗi a
+    for (int i = a.size() - 1; i >= 0; --i) {
+        int digit = a[i] - '0'; // Chuyển đổi ký tự thành số nguyên
+        int product = digit * b + carry; // Nhân và cộng thêm giá trị thừa
+        carry = product / 10; // Tính giá trị thừa
+        result = to_string(product % 10) + result; // Thêm chữ số vào kết quả
+    }
+
+    // Nếu còn giá trị thừa cuối cùng, thêm vào kết quả
+    if (carry > 0) {
+        result = to_string(carry) + result;
+    }
+
+    return result;
+}
+
+int main() {
+    string a;
+    int b;
+    cin >> a >> b; // Đọc hai số từ đầu vào
+
+    // Tính tích của hai số
+    string result = multiplyLargeNumber(a, b);
+
+    // In kết quả
+    cout << result << endl;
+
+    return 0;
+}
