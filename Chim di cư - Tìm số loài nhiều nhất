@@ -1,0 +1,40 @@
+Một bầy chim di cư bay qua lục địa. Mỗi loài chim khác nhau có một ID khác nhau được đánh số từ 1 đến 5.
+
+Cho một dãy gồm n số nguyên, mỗi số nguyên là một loài chim khác nhau trong bầy. Hãy viết chương trình tìm ra loài chim đông đảo nhất trong bầy chim di cư này. Nếu có nhiều hơn 2 loài chim có cùng số lượng, in ra loài chim có ID nhỏ nhất.
+
+Đầu vào: 
+Dòng đầu tiên chứa số nguyên n là số lượng chim trong bầy (5≤n≤2×105)
+Dòng thứ hai chứa ID của n con  trong  bầy, mỗi ID cách nhau bởi một khoảng trắng.
+Đầu ra: 
+ID của loài chim có số lượng lớn nhất trong bầy.
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    int n;
+    
+    std::cin >> n;
+
+    std::vector<int> bird_counts(6, 0); // Khởi tạo vector để đếm số lượng chim, 6 phần tử vì ID từ 1 đến 5
+
+    
+    for (int i = 0; i < n; ++i) {
+        int bird_id;
+        std::cin >> bird_id;
+        bird_counts[bird_id]++;
+    }
+
+    int max_count = 0;
+    int most_common_bird = 1;
+    for (int i = 1; i <= 5; ++i) {
+        if (bird_counts[i] > max_count) {
+            max_count = bird_counts[i];
+            most_common_bird = i;
+        }
+    }
+
+    std::cout << most_common_bird << std::endl;
+
+    return 0;
+}
