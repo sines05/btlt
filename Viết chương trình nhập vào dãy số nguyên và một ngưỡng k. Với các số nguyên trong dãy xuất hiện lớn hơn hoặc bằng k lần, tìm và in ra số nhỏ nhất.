@@ -1,0 +1,51 @@
+Viết chương trình nhập vào dãy số nguyên và một ngưỡng k. Với các số nguyên trong dãy xuất hiện lớn hơn hoặc bằng k lần, tìm và in ra số nhỏ nhất.
+Input:
+
+- Dòng đầu chứa số các số nguyên n, và ngưỡng k (0<n<500).
+
+- Dòng thứ hai chứa n số nguyên.
+
+Output:
+- In ra số nguyên nhỏ nhất (xuất hiện >=k lần) tìm được. Nếu không có thì in ra: NOT FOUND
+
+
+#include <iostream>
+#include <map>
+#include <limits>
+#include <vector>
+
+int main() {
+    int n, k;
+
+    std::cin >> n >> k;
+
+    std::vector<int> numbers(n);
+
+    for (int i = 0; i < n; ++i) {
+        std::cin >> numbers[i];
+    }
+
+    std::map<int, int> count_map;
+    for (int num : numbers) {
+        count_map[num]++;
+    }
+
+    int smallest_number = std::numeric_limits<int>::max();
+    bool found = false;
+    for (const auto& pair : count_map) {
+        if (pair.second >= k) {
+            if (pair.first < smallest_number) {
+                smallest_number = pair.first;
+                found = true;
+            }
+        }
+    }
+
+    if (found) {
+        std::cout << smallest_number << std::endl;
+    } else {
+        std::cout << "NOT FOUND" << std::endl;
+    }
+
+    return 0;
+}
